@@ -1,0 +1,81 @@
+<div class="row">
+  <div class="col-4"></div>
+  <div class="col-4">
+    <button
+      class="btn btn-primary add-btn"
+      (click)="openModal(itemToAddOrEdit)"
+    >
+      <fa-icon [icon]="faPlus"></fa-icon>Add Item
+    </button>
+  </div>
+  <div class="col-4"></div>
+</div>
+<div class="row">
+  <div class="col-1"></div>
+  <div class="col-10">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Completed</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of toDoList">
+          <td [class.completed]="item.completed">{{ item.todo }}</td>
+          <td [class.completed]="item.completed">
+            {{ item.completed ? "Yes" : "No" }}
+          </td>
+          <td [class.completed]="item.completed">
+            <div class="row">
+              <div class="col-1"></div>
+              <div class="col-5">
+                <button
+                  class="btn btn-primary btn-sm action-btn"
+                  (click)="editItem(item)"
+                  [disabled]="item.completed"
+                >
+                  <fa-icon [icon]="faPenToSquare"></fa-icon>
+                </button>
+              </div>
+              <div class="col-5">
+                <button
+                  class="btn btn-danger btn-sm action-btn"
+                  (click)="deleteItem(item)"
+                >
+                  <fa-icon [icon]="faTrash"></fa-icon>
+                </button>
+              </div>
+              <div class="col-1"></div>
+            </div>
+            <div class="row">
+              <div class="col-1"></div>
+              <div class="col-10">
+                <button
+                  *ngIf="!item.completed"
+                  class="btn btn-secondary btn-sm action-btn"
+                  (click)="markCompleted(item)"
+                >
+                  Mark as Done
+                </button>
+                <button
+                  *ngIf="item.completed"
+                  class="btn btn-success btn-sm action-btn"
+                  (click)="markIncompleted(item)"
+                >
+                  Not Done yet!
+                </button>
+              </div>
+              <div class="col-1"></div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-1"></div>
+</div>
+
+<!-- <app-to-do-item-form [item]="itemToAddOrEdit" (onSave)="onSaveItem($event)"></app-to-do-item-form> -->
+<!-- <button class="btn btn-primary" (click)="openItemForm()">Add Item</button> -->

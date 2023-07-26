@@ -1,0 +1,43 @@
+<app-modal-basic
+  [title]="item.id > 0 ? 'Edit Item' : 'Add Item'"
+  [form]="form"
+>
+  <ng-template>
+    <div class="container mt-4">
+      <form
+        id="popupform"
+        #todoForm="ngForm"
+        (ngSubmit)="onSubmit($event, todoForm.form)"
+      >
+        <div class="form-group">
+          <label for="title">TO DO</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            name="title"
+            [(ngModel)]="item.todo"
+            required
+            maxlength="250"
+            #titleInput="ngModel"
+          />
+          <div
+            *ngIf="
+              titleInput.invalid && (titleInput.dirty || titleInput.touched)
+            "
+            class="text-danger"
+          >
+            Title is required and should be 250 characters max.
+          </div>
+        </div>
+        <!-- <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="todoForm.invalid"
+        >
+          Add Item
+        </button> -->
+      </form>
+    </div>
+  </ng-template>
+</app-modal-basic>
